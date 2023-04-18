@@ -1,0 +1,15 @@
+classDeclaration : 'class' className=ID '"' description=TEXT? '{'
+                   'vida' vida=INT ';'
+                   'mana' mana=INT ';'
+                   'items' '{' itemDeclaration* '}'
+                   'actions' '{' actionDeclaration* '}'
+                   '}';
+
+itemDeclaration : itemName=ID 'damage' damage=INT ';';
+
+actionDeclaration : actionName=ID (damage=INT)?;
+
+ID : [a-zA-Z_] [a-zA-Z_0-9]*;
+TEXT : '"' ID* '"';
+INT : [0-9]+;
+WS : [ \t\r\n]+ -> skip;
