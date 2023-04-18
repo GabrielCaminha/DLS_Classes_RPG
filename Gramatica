@@ -1,15 +1,24 @@
-classDeclaration : 'class' className=ID '"' description=TEXT? '{'
-                   'vida' vida=INT ';'
-                   'mana' mana=INT ';'
-                   'items' '{' itemDeclaration* '}'
-                   'actions' '{' actionDeclaration* '}'
-                   '}';
+grammar RPGDSL;
 
-itemDeclaration : itemName=ID 'damage' damage=INT ';';
+input: (classDeclaration)+;
 
-actionDeclaration : actionName=ID (damage=INT)?;
+classDeclaration: 'class' className=ID '{'
+    'vida' vida=INT ';'
+    'mana' mana=INT ';'
+    'descricao' descricao=STRING ';'
+    (attributeDeclaration | itemDeclaration | actionDeclaration)*
+    '}';
 
-ID : [a-zA-Z_] [a-zA-Z_0-9]*;
-TEXT : '"' ID* '"';
-INT : [0-9]+;
-WS : [ \t\r\n]+ -> skip;
+attributeDeclaration: ('int' | 'string') attributeName=ID ';';
+
+itemDeclaration: 'item' itemName=ID 'deals' damage=INT 'damage' ';';
+
+actionDeclaration: 'action' actionName=ID '(' ')' (':' returnType=ID)? '{'  '}';
+
+STRING: '"' ID* '"';
+
+ID: [a-zA-Z_] [a-zA-Z_0-9]*;
+
+INT: [0-9]+;
+
+WS: [ \t\r\n]+ -> skip;
