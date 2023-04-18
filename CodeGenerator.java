@@ -9,18 +9,19 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
     @Override
     public Void visitClassDeclaration(RPGDSLParser.ClassDeclarationContext ctx) {
         String className = ctx.className.getText();
-        String classDescription = ctx.description != null ? ctx.description.getText() : "\"\"";
+        String classDescription = ctx.description != null ? ctx.description.getText() : "";
 
         System.out.printf("public class %s {\n", className);
-        System.out.printf("\tprivate String description = %s;\n", classDescription);
-        System.out.println("\tprivate int vida;");
-        System.out.println("\tprivate int mana;");
+        System.out.printf("\tprivate String descricao = \"%s\";\n", classDescription);
+        System.out.printf("\tprivate int vida = %s;\n", ctx.vida.getText());
+        System.out.printf("\tprivate int mana = %s;\n", ctx.mana.getText());
 
         System.out.println("\n\t// Attributes");
         for (RPGDSLParser.AttributeDeclarationContext attrDecl : ctx.attributeDeclaration()) {
             String type = attrDecl.type.getText();
             String name = attrDecl.attributeName.getText();
-            System.out.printf("\tprivate %s %s;\n", type, name);
+            String amount = attrDecl.attributeAmoubt.getText();
+            System.out.printf("\tprivate %s %s = %s;\n", type, name, amount);
         }
 
         System.out.println("\n\t// Items");
@@ -45,4 +46,5 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
     }
 
 }
+
 
