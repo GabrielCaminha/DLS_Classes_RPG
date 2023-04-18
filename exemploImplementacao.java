@@ -1,25 +1,13 @@
-class Mage "A powerful spellcaster" {
-    vida 10;
-    mana 100;
-    items {
-        wand damage 5;
-        robe damage 2;
-    }
-    actions {
-        fireball damage 20;
-        heal damage -10;
-    }
-}
-
-class Warrior "A fierce fighter" {
-    vida 20;
-    mana 0;
-    items {
-        sword damage 10;
-        shield damage 5;
-    }
-    actions {
-        charge damage 15;
-        block damage -5;
+class Warrior {
+    descricao "A fierce fighter";
+    vida 100;
+    mana 50;
+    int strength;
+    int agility;
+    item sword deals 10 damage;
+    item shield deals 5 damage;
+    action attack() {
+        : int;
+        20;
     }
 }
