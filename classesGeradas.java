@@ -1,35 +1,18 @@
-public class Mage {
-	// Description: A powerful spellcaster
-	private int vida = 10;
-	private int mana = 100;
-
-	// Items
-	private int wandDamage = 5;
-	private int robeDamage = 2;
-
-	// Actions
-	public void fireball() {
-		System.out.println("fireball dealt 20 damage!");
-	}
-	public void heal() {
-		System.out.println("heal dealt -10 damage!");
-	}
-}
-
 public class Warrior {
-	// Description: A fierce fighter
-	private int vida = 20;
-	private int mana = 0;
+    private String descricao = "A fierce fighter";
+    private int vida;
+    private int mana;
 
-	// Items
-	private int swordDamage = 10;
-	private int shieldDamage = 5;
+    // Attributes
+    private int strength;
+    private int agility;
 
-	// Actions
-	public void charge() {
-		System.out.println("charge dealt 15 damage!");
-	}
-	public void block() {
-		System.out.println("block dealt -5 damage!");
-	}
+    // Items
+    private int swordDamage = 10;
+    private int shieldDamage = 5;
+
+    // Actions
+    public int attack() {
+        System.out.println("attack dealt 20 damage!");
+    }
 }
