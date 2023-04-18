@@ -5,17 +5,17 @@ input: (classDeclaration)+;
 classDeclaration: 'class' className=ID '{'
     'vida' vida=INT ';'
     'mana' mana=INT ';'
-    'descricao' descricao=STRING ';'
+    ('descricao' descricao=STRING ';')?
     (attributeDeclaration | itemDeclaration | actionDeclaration)*
     '}';
 
-attributeDeclaration: ('int' | 'string') attributeName=ID ';';
+attributeDeclaration: 'int' attributeName=ID attributeAmoubt = INT ';';
 
 itemDeclaration: 'item' itemName=ID 'deals' damage=INT 'damage' ';';
 
 actionDeclaration: 'action' actionName=ID '(' ')' (':' returnType=ID)? '{'  '}';
 
-STRING: '"' ID* '"';
+STRING: '"' (~["\\\r\n] | '\\' .)* '"';
 
 ID: [a-zA-Z_] [a-zA-Z_0-9]*;
 
