@@ -9,10 +9,10 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
     @Override
     public Void visitClassDeclaration(RPGDSLParser.ClassDeclarationContext ctx) {
         String className = ctx.className.getText();
-        String classDescription = ctx.description != null ? ctx.description.getText() : "";
+        String classDescription = ctx.description != null ? ctx.description.getText() : "\"\"";
 
         System.out.printf("public class %s {\n", className);
-        System.out.printf("\t// Description: %s\n", classDescription);
+        System.out.printf("\tprivate String description = %s;\n", classDescription);
         System.out.println("\tprivate int vida;");
         System.out.println("\tprivate int mana;");
 
@@ -45,3 +45,4 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
     }
 
 }
+
