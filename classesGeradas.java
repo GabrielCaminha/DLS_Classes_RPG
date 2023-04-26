@@ -18,8 +18,8 @@ public class Guerreiro {
         forca += 5;
     }
 
-    public void beberPoção() {
-        vida += poçãoHealing;
+    public void sobrevida() {
+        vida += 20;
     }
 
     // Getters e Setters para os itens
