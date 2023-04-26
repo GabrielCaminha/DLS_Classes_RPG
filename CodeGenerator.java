@@ -26,9 +26,16 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
 
         System.out.println("\n\t// Items");
         for (RPGDSLParser.ItemDeclarationContext itemDecl : ctx.itemDeclaration()) {
-            String itemName = itemDecl.itemName.getText();
-            int itemDamage = Integer.parseInt(itemDecl.damage.getText());
-            System.out.printf("\tprivate int %sDamage = %d;\n", itemName, itemDamage);
+            String itemName = ctx.itemName.getText();
+    if (ctx.damage != null) {
+        // item de dano
+        int itemDamage = Integer.parseInt(ctx.damage.getText());
+        System.out.printf("\tprivate int %sDamage = %d;\n", itemName, itemDamage);
+    } else {
+        // item de cura
+        int itemHealing = Integer.parseInt(ctx.healing.getText());
+        System.out.printf("\tprivate int %sHealing = %d;\n", itemName, itemHealing);
+    }
         }
 
         System.out.println("\n\t// Actions");
