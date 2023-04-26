@@ -43,12 +43,33 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
             String actionName = actionDecl.actionName.getText();
             String returnType = actionDecl.returnType != null ? actionDecl.returnType.getText() : "void";
             String actionDamage = actionDecl.damage != null ? actionDecl.damage.getText() : "0";
+            String actionHeal = actionDecl.healing != null ? actionDecl.healing.getText() : "0";
             System.out.printf("\tpublic %s %s() {\n", returnType, actionName);
+            if(actionDamage != 0)
             System.out.printf("\t\tSystem.out.println(\"%s dealt %s damage!\");\n", actionName, actionDamage);
+            if(actionHeal != 0)
+            System.out.printf("\t\tSystem.out.println(\"%s heals %s damage!\");\n", actionName, actionHeal);
             System.out.println("\t}");
         }
-
-        System.out.println("}\n");
+        System.out.println("\n\t// Getters e Setters para os itens");
+        for (RPGDSLParser.ItemDeclarationContext itemDecl : ctx.itemDeclaration()) {
+            String itemName = itemDecl.itemName.getText();
+            if (itemDecl.damage != null) {
+                // item de dano
+                System.out.printf("\tpublic int get%sDamage() {\n", itemName);
+                System.out.printf("\t\treturn %sDamage;\n", itemName);
+                System.out.println("\t}");
+                System.out.printf("\tpublic void set%sDamage(int damage) {\n", itemName);
+                System.out.printf("\t\t%sDamage = damage;\n", itemName);
+                System.out.println("\t}");
+            } else {
+                // item de cura
+                System.out.printf("\tpublic int get%sHealing() {\n", itemName);
+                System.out.printf("\t\treturn %sHealing;\n", itemName);
+                System.out.println("\t}");
+                System.out.printf("\tpublic void set%sHealing(int healing) {\n", itemName);
+                System.out.printf("\t\t%sHealing = healing;\n", itemName);
+                System.out.println("\t}");
         return null;
     }
 
