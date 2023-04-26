@@ -15,7 +15,7 @@ class Guerreiro  {
     forca += 5;
   }
   
-  action beberPoção() {
-    vida += poçãoHealing;
+  action sobrevida() {
+    vida += 20;
   }
 }
