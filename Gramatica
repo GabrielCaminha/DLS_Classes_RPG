@@ -9,9 +9,9 @@ classDeclaration: 'class' className=ID '{'
     (attributeDeclaration | itemDeclaration | actionDeclaration)*
     '}';
 
-attributeDeclaration: 'int' attributeName=ID attributeAmoubt = INT ';';
+attributeDeclaration: 'int' attributeName=ID attributeAmount=INT ';';
 
-itemDeclaration: 'item' itemName=ID 'deals' damage=INT 'damage' ';';
+itemDeclaration: 'item' itemName=ID ('deals' damage=INT 'damage' | 'heals' healing=INT 'life') ';';
 
 actionDeclaration: 'action' actionName=ID '(' ')' (':' returnType=ID)? '{'  '}';
 
