@@ -13,7 +13,15 @@ attributeDeclaration: 'int' attributeName=ID attributeAmount=INT ';';
 
 itemDeclaration: 'item' itemName=ID ('deals' damage=INT 'damage' | 'heals' healing=INT 'life') ';';
 
-actionDeclaration: 'action' actionName=ID '(' ')' (':' returnType=ID)? '{'  '}';
+actionDeclaration: 'action' actionName=ID '(' ')' (':' returnType=ID)? '{' codeBlock '}';
+
+codeBlock: (codeStatement)*;
+
+codeStatement: attributeAssignment | itemUsage;
+
+attributeAssignment: attributeName=ID '+=' amount=INT ';';
+
+itemUsage: itemName=ID ('+' | '-') ';';
 
 STRING: '"' (~["\\\r\n] | '\\' .)* '"';
 
