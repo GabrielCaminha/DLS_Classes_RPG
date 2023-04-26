@@ -13,7 +13,7 @@ public class Guerreiro {
     private int poçãoHealing = 25;
 
     // Actions
-    public void atacar() {
+    public void fortalecer() {
         destreza += 2;
         forca += 5;
     }
