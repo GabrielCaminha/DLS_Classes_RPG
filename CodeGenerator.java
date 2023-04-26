@@ -39,16 +39,25 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
         }
 
         System.out.println("\n\t// Actions");
+         System.out.println("\n\t// Actions");
         for (RPGDSLParser.ActionDeclarationContext actionDecl : ctx.actionDeclaration()) {
             String actionName = actionDecl.actionName.getText();
             String returnType = actionDecl.returnType != null ? actionDecl.returnType.getText() : "void";
-            String actionDamage = actionDecl.damage != null ? actionDecl.damage.getText() : "0";
-            String actionHeal = actionDecl.healing != null ? actionDecl.healing.getText() : "0";
+            String actionVida = actionDecl.vida != null ? actionDecl.vida.getText() : "0";
+            String actionMana = actionDecl.mana != null ? actionDecl.mana.getText() : "0";
+            String actionAtributo = actionDecl.attributeName != null ? actionDecl.attributeName.getText() : "";
+            String actionAmount = actionDecl.attributeAmount != null ? actionDecl.attributeAmount.getText() : "0";
+            
             System.out.printf("\tpublic %s %s() {\n", returnType, actionName);
-            if(actionDamage != 0)
-            System.out.printf("\t\tSystem.out.println(\"%s dealt %s damage!\");\n", actionName, actionDamage);
-            if(actionHeal != 0)
-            System.out.printf("\t\tSystem.out.println(\"%s heals %s damage!\");\n", actionName, actionHeal);
+            if (!actionVida.equals("0")) {
+                System.out.printf("\t\tvida += %s;\n", actionVida);
+            }
+            if (!actionMana.equals("0")) {
+                System.out.printf("\t\tmana += %s;\n", actionMana);
+            }
+            if (!actionAtributo.equals("")) {
+                System.out.printf("\t\t%s += %s;\n", actionAtributo, actionAmount);
+            }
             System.out.println("\t}");
         }
         System.out.println("\n\t// Getters e Setters para os itens");
@@ -70,9 +79,19 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
                 System.out.printf("\tpublic void set%sHealing(int healing) {\n", itemName);
                 System.out.printf("\t\t%sHealing = healing;\n", itemName);
                 System.out.println("\t}");
+            }
+        }
+        for (RPGDSLParser.ActionDeclarationContext attDecl : ctx.attributeDeclaration()) {
+            String attributeName = attDecl.attributeName.getText();
+                System.out.printf("\tpublic int get%sAtt() {\n", attributeName);
+                System.out.printf("\t\treturn %sAtt;\n", attributeName);
+                System.out.println("\t}");
+                System.out.printf("\tpublic void set%sAtt(int amount) {\n", attributeName);
+                System.out.printf("\t\t%sAtt = amount;\n", attributeName);
+                System.out.println("\t}");
+            }
         return null;
-    }
-
+            
 }
 
 
