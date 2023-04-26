@@ -1,23 +1,21 @@
-class Warrior {
-  vida 100;
+class Guerreiro  {
+  vida 150;
   mana 50;
-  descricao "Um guerreiro valente e forte";
+  descricao "Classe focada em combate corpo-a-corpo.";
   
   int forca 10;
-  int defesa 5;
+  int destreza 8;
+  int constituição 12
   
   item espada deals 15 damage;
-  item escudo deals 5 damage;
+  item pocao heals 25 life;
   
-  action atacar() {
-    : int
-    damage = espadaDamage + forca;
-    mana -= 10;
-    return damage;
+  action fortalecer() {
+    destreza += 2;
+    forca += 5;
   }
   
-  action defender() {
-    defesa += escudoDamage;
-    mana -= 5;
+  action beberPoção() {
+    vida += poçãoHealing;
   }
 }
