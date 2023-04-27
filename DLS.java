@@ -8,7 +8,7 @@ class Guerreiro  {
   int constituição 12
   
   item espada deals 15 damage;
-  item pocao heals 25 life;
+  item pocao heals 25;
   
   action fortalecer() {
     destreza += 2;
