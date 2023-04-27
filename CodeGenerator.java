@@ -39,7 +39,6 @@ public class CodeGenerator extends RPGDSLBaseVisitor<Void> {
         }
 
         System.out.println("\n\t// Actions");
-         System.out.println("\n\t// Actions");
         for (RPGDSLParser.ActionDeclarationContext actionDecl : ctx.actionDeclaration()) {
             String actionName = actionDecl.actionName.getText();
             String returnType = actionDecl.returnType != null ? actionDecl.returnType.getText() : "void";
